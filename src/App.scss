@@ -1,3 +1,4 @@
+@use './styles/variables' as var;
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,600;6..12,800&display=swap');
 
 * {
@@ -5,4 +6,18 @@
 	margin: 0;
 	padding: 0;
 	font-family: 'Nunito Sans', sans-serif;
+}
+
+.App {
+	$navH: 80px;
+	display: grid;
+	grid-template-rows: $navH calc(100vh - $navH);
+	height: 100vh;
+
+	& .nav {
+		background-color: var.$color-white;
+	}
+	& .content {
+		background-color: var.$color-very-light-gray;
+	}
 }
