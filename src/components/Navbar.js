@@ -22,7 +22,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
 				{!darkMode &&
 				<>
-					<svg width='20' xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'>
+					<svg width='20' xmlns='http://www.w3.org/2000/svg' className='ionicon' viewBox='0 0 512 512'>
 						<path
 							fill='none'
 							stroke='currentColor'

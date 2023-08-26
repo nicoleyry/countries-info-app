@@ -1,0 +1,6 @@
+@use "./variables" as var;
+
+@mixin box-style() {
+	box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.5);
+	border-radius: 3px;
+}
