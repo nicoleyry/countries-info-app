@@ -1,7 +1,12 @@
 import { useState, cloneElement } from 'react';
 import '../styles/content.scss';
+import Card from './Card';
+import countriesData from '../data.json';
 
 export default function Navbar({ searchValue, setSearchValue }) {
+	let cardsPerShow = 8;
+	let [cardsToShow, setCardsToShow] = useState(cardsPerShow);
+
 	const [open, setOpen] = useState(false);
 
 	const handleMenu = (e) => {
@@ -15,6 +20,10 @@ export default function Navbar({ searchValue, setSearchValue }) {
 
 	let typeHandler = (e) => {
 		setSearchValue(e.target.value);
+	};
+
+	let showMoreHandler = () => {
+		setCardsToShow(n => n + cardsPerShow);
 	};
 
 	return (
@@ -38,17 +47,24 @@ export default function Navbar({ searchValue, setSearchValue }) {
 					setOpen={setOpen}
 					trigger={<button className={`dropdown-btn ${open ? 'open' : ''}`}>Filter by Region</button>}
 					menu={[
-						<input type='button' value="Africa" onClick={handleMenu}/>,
-						<input type='button' value="America" onClick={handleMenu}/>,
-						<input type='button' value="Asia" onClick={handleMenu}/>,
-						<input type='button' value="Asia" onClick={handleMenu}/>,
-						<input type='button' value="Oceania" onClick={handleMenu}/>
+						<input type='button' value='Africa' onClick={handleMenu} />,
+						<input type='button' value='America' onClick={handleMenu} />,
+						<input type='button' value='Asia' onClick={handleMenu} />,
+						<input type='button' value='Asia' onClick={handleMenu} />,
+						<input type='button' value='Oceania' onClick={handleMenu} />,
 					]}
 				/>
 			</div>
+			<div className='result-area'>
+				{countriesData.slice(0, cardsToShow).map(createCard)}
+				{/* {countriesData.map(createCard)} */}
+			</div>
+			<div className="show-more" onClick={showMoreHandler}>
+				<p>Show More</p>
+			</div>
 		</div>
 	);
-};
+}
 
 const Dropdown = ({ trigger, menu, open, setOpen }) => {
 	const handleOpen = () => {
@@ -76,5 +92,18 @@ const Dropdown = ({ trigger, menu, open, setOpen }) => {
 				</ul>
 			) : null}
 		</div>
+	);
+};
+
+const createCard = (countriesData) => {
+	return (
+		<Card
+			key={countriesData.alpha2Code}
+			name={countriesData.name}
+			population={countriesData.population}
+			flag={countriesData.flag}
+			region={countriesData.region}
+			capital={countriesData.capital}
+		/>
 	);
 };
