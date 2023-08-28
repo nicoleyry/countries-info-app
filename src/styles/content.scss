@@ -15,10 +15,12 @@
 			padding: 5px;
 			@include mix.box-style();
 
+			$btnW: 40px;
+
 			& .search-btn {
 				text-indent: -999px;
 				overflow: hidden;
-				width: 40px;
+				width: $btnW;
 				padding: 0;
 				margin: 0;
 				border: 1px solid transparent;
@@ -40,6 +42,7 @@
 				font-size: 14px;
 				border: 1px solid transparent;
 				border-radius: inherit;
+				width: calc(100% - $btnW);
 
 				&:focus {
 					outline: none;
