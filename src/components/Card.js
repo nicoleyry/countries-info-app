@@ -1,8 +1,11 @@
 import '../styles/card.scss';
 
 export default function Card(props) {
+	let clickHandler = (name) => {
+		console.log(name);
+	};
 	return(
-		<div className='card'>
+		<div className='card' onClick={(e) => clickHandler(props.name)}>
 			<div className='img-area' style={{backgroundImage: `url(${props.flag})`}}></div>
 			<div className='detail'>
 				<p className='name'>{props.name}</p>
