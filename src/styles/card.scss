@@ -8,6 +8,11 @@
 	background-color: var.$color-white;
 	cursor: pointer;
 
+	& a {
+		text-decoration: none;
+		color: var.$color-black;
+	}
+
 	& .img-area {
 		width: 100%;
 		height: 150px;

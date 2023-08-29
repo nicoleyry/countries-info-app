@@ -1,9 +1,8 @@
 import { useState, cloneElement, useEffect } from 'react';
 import '../styles/content.scss';
 import Card from './Card';
-import countriesData from '../data.json';
 
-export default function Content({ searchValue, setSearchValue }) {
+export default function Content({ setSelectedCountry, searchValue, setSearchValue, countriesData }) {
 	let cardsPerShow = 8;
 	const [cardsToShow, setCardsToShow] = useState(cardsPerShow);
 	const [filterRegion, setFilterRegion] = useState('');
@@ -22,7 +21,7 @@ export default function Content({ searchValue, setSearchValue }) {
 	// Dropdown filter data
 	useEffect(() => {
 		setFilteredData(countriesData.filter((country) => country.region === filterRegion));
-	}, [filterRegion]);
+	}, [countriesData, filterRegion]);
 
 	// Search for data
 	useEffect(() => {
@@ -30,7 +29,7 @@ export default function Content({ searchValue, setSearchValue }) {
 		let result = countriesData.filter((country) => country.name.includes(searchParam));
 		setFilteredData(result);
 		result.length === 0 ? setNoResult(true) : setNoResult(false);
-	}, [searchValue]);
+	}, [countriesData, searchValue]);
 
 	let searchHandler = (e) => {
 		e.preventDefault();
@@ -42,6 +41,20 @@ export default function Content({ searchValue, setSearchValue }) {
 
 	let showMoreHandler = () => {
 		setCardsToShow((n) => n + cardsPerShow);
+	};
+
+	let createCard = (countriesData) => {
+		return (
+			<Card
+				key={countriesData.alpha2Code}
+				name={countriesData.name}
+				population={countriesData.population}
+				flag={countriesData.flag}
+				region={countriesData.region}
+				capital={countriesData.capital}
+				onClick={(name) => setSelectedCountry(name)}
+			/>
+		);
 	};
 
 	return (
@@ -114,18 +127,5 @@ const Dropdown = ({ trigger, menu, open, setOpen, setFilterRegion }) => {
 				</ul>
 			) : null}
 		</div>
-	);
-};
-
-const createCard = (countriesData) => {
-	return (
-		<Card
-			key={countriesData.alpha2Code}
-			name={countriesData.name}
-			population={countriesData.population}
-			flag={countriesData.flag}
-			region={countriesData.region}
-			capital={countriesData.capital}
-		/>
 	);
 };

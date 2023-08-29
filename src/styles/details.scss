@@ -1,0 +1,98 @@
+@use "./variables" as var;
+@use "./mixins" as mix;
+
+.details {
+	padding: 50px;
+
+	& .top {
+		width: 100%;
+		margin-bottom: 50px;
+
+		& .back-btn {
+			width: 100px;
+			padding: 5px 15px;
+			cursor: pointer;
+			display: flex;
+			gap: 5px;
+			justify-content: center;
+			align-items: center;
+			background-color: var.$color-white;
+			text-decoration: none;
+			color: var.$color-black;
+			
+			@include mix.box-style();
+
+			&:hover {
+				background-color: rgba(var.$color-dark-gray, $alpha: 0.1);
+			}
+			&:active {
+				box-shadow: rgba(var.$color-dark-gray, 0.2) var.$btn-active-shadow;
+				transform: translateY(1px);
+			}
+
+			& p {
+				font-weight: 600;
+				font-size: 14px;
+			}
+		}
+	}
+
+	& .bottom {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+		align-items: center;
+
+		& .img-area {
+			width: 100%;
+			max-width: 500px;
+			height: auto;
+			box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
+		}
+
+		& .info-area {
+			& .name {
+				margin-bottom: 20px;
+			}
+			& .info {
+				display: flex;
+				flex-wrap: wrap;
+				margin-bottom: 50px;
+
+				& .title {
+					width: 50%;
+					font-weight: 600;
+					margin-bottom: 5px;
+
+					& .data {
+						font-weight: 300;
+					}
+				}
+			}
+
+			& .border-info {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+
+				& .title {
+					font-weight: 600;
+					white-space: nowrap;
+				}
+				& .border-data {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 10px;
+
+					& .data {
+						font-size: 14px;
+						padding: 5px 10px;
+						background-color: var.$color-white;
+						box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
+						border-radius: 3px;
+					}
+				}
+			}
+		}
+	}
+}
