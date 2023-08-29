@@ -1,4 +1,4 @@
-import { useState, cloneElement } from 'react';
+import { useState, cloneElement, useEffect } from 'react';
 import '../styles/content.scss';
 import Card from './Card';
 import countriesData from '../data.json';
@@ -8,8 +8,9 @@ export default function Content({ searchValue, setSearchValue }) {
 	const [cardsToShow, setCardsToShow] = useState(cardsPerShow);
 	const [filterRegion, setFilterRegion] = useState('');
 	const [open, setOpen] = useState(false);
+	const [noResult, setNoResult] = useState(false);
+	let [filteredData, setFilteredData] = useState(countriesData.filter((country) => country.region === filterRegion));
 
-	let filteredData = countriesData.filter((country) => country.region === filterRegion);
 	let allRegionData = [];
 	for (const [key, val] of Object.entries(countriesData)) {
 		allRegionData[key] = val.region;
@@ -17,6 +18,19 @@ export default function Content({ searchValue, setSearchValue }) {
 	let regionData = allRegionData.filter((value, index, array) => array.indexOf(value) === index);
 	const handleMenu = () => {};
 	let menu = regionData.map((region) => <input type='button' value={region} onClick={handleMenu} />);
+
+	// Dropdown filter data
+	useEffect(() => {
+		setFilteredData(countriesData.filter((country) => country.region === filterRegion));
+	}, [filterRegion]);
+
+	// Search for data
+	useEffect(() => {
+		let searchParam = searchValue.charAt(0).toUpperCase() + searchValue.slice(1); // capitalize search param
+		let result = countriesData.filter((country) => country.name.includes(searchParam));
+		setFilteredData(result);
+		result.length === 0 ? setNoResult(true) : setNoResult(false);
+	}, [searchValue]);
 
 	let searchHandler = (e) => {
 		e.preventDefault();
@@ -59,13 +73,16 @@ export default function Content({ searchValue, setSearchValue }) {
 				/>
 			</div>
 			<div className='result-area'>
-				{filterRegion.length === 0
+				{!noResult && filterRegion.length === 0 && searchValue.length === 0
 					? countriesData.slice(0, cardsToShow).map(createCard)
 					: filteredData.slice(0, cardsToShow).map(createCard)}
+				{noResult && <p className='msg'>No results for "{searchValue}"</p>}
 			</div>
-			<div className='show-more' onClick={showMoreHandler}>
-				<p>Show More</p>
-			</div>
+			{!noResult && (
+				<div className='show-more' onClick={showMoreHandler}>
+					<p>Show More</p>
+				</div>
+			)}
 		</div>
 	);
 }

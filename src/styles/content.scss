@@ -133,6 +133,12 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 40px;
+
+		& .msg {
+			font-weight: 900;
+			font-size: 24px;
+			padding: 20px;
+		}
 	}
 	& .show-more {
 		margin: 50px auto 0;
