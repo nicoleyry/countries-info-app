@@ -3,19 +3,23 @@ import '../styles/content.scss';
 import Card from './Card';
 import countriesData from '../data.json';
 
-export default function Navbar({ searchValue, setSearchValue }) {
+export default function Content({ searchValue, setSearchValue }) {
 	let cardsPerShow = 8;
-	let [cardsToShow, setCardsToShow] = useState(cardsPerShow);
-
+	const [cardsToShow, setCardsToShow] = useState(cardsPerShow);
+	const [filterRegion, setFilterRegion] = useState('');
 	const [open, setOpen] = useState(false);
 
-	const handleMenu = (e) => {
-		// console.log(e);
-	};
+	let filteredData = countriesData.filter((country) => country.region === filterRegion);
+	let allRegionData = [];
+	for (const [key, val] of Object.entries(countriesData)) {
+		allRegionData[key] = val.region;
+	}
+	let regionData = allRegionData.filter((value, index, array) => array.indexOf(value) === index);
+	const handleMenu = () => {};
+	let menu = regionData.map((region) => <input type='button' value={region} onClick={handleMenu} />);
 
 	let searchHandler = (e) => {
 		e.preventDefault();
-		console.log(e);
 	};
 
 	let typeHandler = (e) => {
@@ -23,7 +27,7 @@ export default function Navbar({ searchValue, setSearchValue }) {
 	};
 
 	let showMoreHandler = () => {
-		setCardsToShow(n => n + cardsPerShow);
+		setCardsToShow((n) => n + cardsPerShow);
 	};
 
 	return (
@@ -45,28 +49,28 @@ export default function Navbar({ searchValue, setSearchValue }) {
 				<Dropdown
 					open={open}
 					setOpen={setOpen}
-					trigger={<button className={`dropdown-btn ${open ? 'open' : ''}`}>Filter by Region</button>}
-					menu={[
-						<input type='button' value='Africa' onClick={handleMenu} />,
-						<input type='button' value='America' onClick={handleMenu} />,
-						<input type='button' value='Asia' onClick={handleMenu} />,
-						<input type='button' value='Asia' onClick={handleMenu} />,
-						<input type='button' value='Oceania' onClick={handleMenu} />,
-					]}
+					setFilterRegion={setFilterRegion}
+					trigger={
+						<button className={`dropdown-btn ${open ? 'open' : ''}`}>
+							{filterRegion.length === 0 ? 'Filter by Region' : filterRegion}
+						</button>
+					}
+					menu={menu}
 				/>
 			</div>
 			<div className='result-area'>
-				{countriesData.slice(0, cardsToShow).map(createCard)}
-				{/* {countriesData.map(createCard)} */}
+				{filterRegion.length === 0
+					? countriesData.slice(0, cardsToShow).map(createCard)
+					: filteredData.slice(0, cardsToShow).map(createCard)}
 			</div>
-			<div className="show-more" onClick={showMoreHandler}>
+			<div className='show-more' onClick={showMoreHandler}>
 				<p>Show More</p>
 			</div>
 		</div>
 	);
 }
 
-const Dropdown = ({ trigger, menu, open, setOpen }) => {
+const Dropdown = ({ trigger, menu, open, setOpen, setFilterRegion }) => {
 	const handleOpen = () => {
 		setOpen(!open);
 	};
@@ -82,6 +86,7 @@ const Dropdown = ({ trigger, menu, open, setOpen }) => {
 						<li key={index} className='menu-item'>
 							{cloneElement(menuItem, {
 								onClick: (e) => {
+									setFilterRegion(e.target.value);
 									console.log(e.target.value);
 									menuItem.props.onClick();
 									setOpen(false);
