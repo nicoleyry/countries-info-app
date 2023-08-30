@@ -31,12 +31,10 @@ export default function Details({ countriesData }) {
 			: notAvailable;
 
 	let fullBorders = [];
-	if (detail.borders) {
-		for (let i = 0; i < countriesData.length; i++) {
-			for (let j = 0; j < detail.borders.length; j++) {
-				if (countriesData[i].cca3 === detail.borders[j]) {
-					fullBorders.push(countriesData[i].name.common);
-				}
+	for (let i = 0; i < countriesData.length; i++) {
+		for (let j = 0; j < detail.borders.length; j++) {
+			if (countriesData[i].cca3 === detail.borders[j]) {
+				fullBorders.push(countriesData[i].name.common);
 			}
 		}
 	}

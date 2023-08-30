@@ -19,8 +19,10 @@ function App() {
 		axios.get(`${apiURL}?fields=${param}`).then((response) => {
 			let data = [...response.data].sort((a, b) => a.name.common > b.name.common ? 1 : -1);
 			setCountriesData(data);
+		}).catch(err => {
+			console.log(err);
 		});
-	}, [apiURL, param]);
+	}, []);
 
 	return (
 		<div className={`App ${darkMode ? 'dark' : ''}`}>

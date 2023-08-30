@@ -28,6 +28,7 @@ export default function Content({ setSelectedCountry, searchValue, setSearchValu
 		let searchParam = searchValue.charAt(0).toUpperCase() + searchValue.slice(1); // capitalize search param
 		let result = countriesData.filter((country) => country.name.common.includes(searchParam));
 		setFilteredData(result);
+		setFilterRegion('');
 		result.length === 0 ? setNoResult(true) : setNoResult(false);
 	}, [countriesData, searchValue]);
 
@@ -91,7 +92,7 @@ export default function Content({ setSelectedCountry, searchValue, setSearchValu
 					: filteredData.slice(0, cardsToShow).map(createCard)}
 				{noResult && <p className='msg'>No results for "{searchValue}"</p>}
 			</div>
-			{!noResult && (
+			{!noResult && (filteredData.length > cardsToShow) && (
 				<div className='show-more' onClick={showMoreHandler}>
 					<p>Show More</p>
 				</div>
