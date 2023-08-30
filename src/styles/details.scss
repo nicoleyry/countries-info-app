@@ -44,6 +44,12 @@
 		gap: 30px;
 		align-items: center;
 
+		@media screen and (max-width: var.$breakpoint-m) {
+			grid-template-columns: auto;
+			grid-template-auto: repeat(2, 1fr);
+			justify-items: center;
+		}
+
 		& .img-area {
 			width: 100%;
 			max-width: 500px;
@@ -52,6 +58,10 @@
 		}
 
 		& .info-area {
+			@media screen and (max-width: var.$breakpoint-m) {
+				max-width: 500px;
+			}
+
 			& .name {
 				margin-bottom: 20px;
 			}
@@ -60,10 +70,19 @@
 				flex-wrap: wrap;
 				margin-bottom: 50px;
 
+				@media screen and (max-width: var.$breakpoint-m) {
+					justify-content: flex-start;
+					gap: 5px;
+				}
+
 				& .title {
 					width: 50%;
 					font-weight: 600;
 					margin-bottom: 5px;
+
+					@media screen and (max-width: var.$breakpoint-m) {
+						width: 200px;
+					}
 
 					& .data {
 						font-weight: 300;
@@ -75,6 +94,11 @@
 				display: flex;
 				align-items: center;
 				gap: 15px;
+
+				@media screen and (max-width: var.$breakpoint-m) {
+					flex-direction: column;
+					align-items: flex-start;
+				}
 
 				& .title {
 					font-weight: 600;
@@ -114,7 +138,7 @@
 			& .info-area {
 				& .border-data {
 					& .data {
-						background-color: var.$color-very-dark-blue;
+						background-color: var.$color-dark-blue;;
 						box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
 					}
 				}

@@ -16,6 +16,7 @@
 
 	& .nav {
 		background-color: var.$color-white;
+		max-width: 100vw;
 	}
 	& .body {
 		background-color: var.$color-very-light-gray;
@@ -23,6 +24,7 @@
 
 	&.dark {
 		color: var.$color-white;
+
 		& .nav {
 			background-color: var.$color-dark-blue;
 		}

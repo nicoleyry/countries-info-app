@@ -1,7 +1,21 @@
+@use "./variables" as var;
+
 .navbar {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	padding: 20px 50px;
+	height: 100%;
+
+	@media screen and (max-width: var.$breakpoint-s) {
+		padding: 10px 20px;
+	}
+
+	& h2 {
+		@media screen and (max-width: var.$breakpoint-m) {
+			font-size: 20px;
+		}
+	}
 
 	& .mode {
 		display: flex;
@@ -9,8 +23,20 @@
 		gap: 10px;
 		cursor: pointer;
 
+		& svg {
+			width: 20px;
+
+			@media screen and (max-width: var.$breakpoint-m) {
+				width: 15px;
+			}
+		}
+
 		& p {
 			font-weight: 600;
+
+			@media screen and (max-width: var.$breakpoint-m) {
+				font-size: 12px;
+			}
 		}
 	}
 }
