@@ -8,37 +8,47 @@ const formatter = new Intl.NumberFormat('en-US', {
 export default function Details({ countriesData }) {
 	let { selectedCountry } = useParams();
 	let notAvailable = 'N/A';
-	let detail = countriesData.filter((country) => country.name === selectedCountry)[0];
-	let currencies = detail.currencies
-		? detail.currencies.map((currency, i, arr) => {
-				return `${currency.name}${i + 1 === arr.length ? '' : ', '}`;
-		})
-		: notAvailable;
+	let detail = countriesData.filter((country) => country.name.common === selectedCountry)[0];
+	let titleName = detail.name.common;
+	let imgUrl = detail.flags.svg;
+	let imgAlt = detail.flags.alt || titleName;
+	let nativeName = Object.values(detail.name.nativeName).length > 0 ? Object.values(detail.name.nativeName)[0].common : titleName;
+	let capital = detail.capital.length > 0 ? detail.capital : notAvailable;
+	let population = (detail.population && formatter.format(detail.population)) || notAvailable;
+	let topLevelDomain = detail.tld.length > 0 ? detail.tld.map((t, i, arr) => `${t}${i + 1 === arr.length ? '' : ', '}`) : notAvailable;
+	let region = detail.region || notAvailable;
+	let subregion = detail.subregion || notAvailable;
+	let currencies =
+		Object.values(detail.currencies).length > 0
+			? Object.values(detail.currencies).map(
+					(currency, i, arr) => `${currency.name}${i + 1 === arr.length ? '' : ', '}`
+			)
+			: notAvailable;
 
-	let languages = detail.languages
-		? detail.languages.map((lang, i, arr) => {
-				return `${lang.name}${i + 1 === arr.length ? '' : ', '}`;
-		})
-		: notAvailable;
+	let languages =
+		Object.values(detail.languages).length > 0
+			? Object.values(detail.languages).map((lang, i, arr) => `${lang}${i + 1 === arr.length ? '' : ', '}`)
+			: notAvailable;
 
 	let fullBorders = [];
-	if(detail.borders) {
+	if (detail.borders) {
 		for (let i = 0; i < countriesData.length; i++) {
 			for (let j = 0; j < detail.borders.length; j++) {
-				if (countriesData[i].alpha3Code === detail.borders[j]) {
-					fullBorders.push(countriesData[i].name);
+				if (countriesData[i].cca3 === detail.borders[j]) {
+					fullBorders.push(countriesData[i].name.common);
 				}
 			}
 		}
 	}
 
-	let fullBordersBlock = fullBorders.length > 0
-		? fullBorders.map((name) => (
-				<span className='data' key={name}>
-					{name}
-				</span>
-		))
-		: notAvailable;
+	let fullBordersBlock =
+		fullBorders.length > 0
+			? fullBorders.map((name) => (
+					<span className='data' key={name}>
+						{name}
+					</span>
+			))
+			: notAvailable;
 
 	return (
 		<div className='details'>
@@ -58,36 +68,33 @@ export default function Details({ countriesData }) {
 				</a>
 			</div>
 			<div className='bottom'>
-				<img className='img-area' src={detail.flag} alt='detail.name' />
+				<img className='img-area' src={imgUrl} alt={imgAlt} />
 				<div className='info-area'>
-					<h1 className='name'>{detail.name}</h1>
+					<h1 className='name'>{titleName}</h1>
 					<div className='info'>
 						<p className='title'>
-							Native Name: <span className='data'>{detail.nativeName || notAvailable}</span>
+							Native Name: <span className='data'>{nativeName}</span>
 						</p>
 						<p className='title'>
-							Top Level Domain: <span className='data'>{detail.topLevelDomain || notAvailable}</span>
+							Top Level Domain: <span className='data'>{topLevelDomain}</span>
 						</p>
 						<p className='title'>
-							Population:
-							<span className='data'>
-								{(detail.population && formatter.format(detail.population)) || notAvailable}
-							</span>
+							Population: <span className='data'>{population}</span>
 						</p>
 						<p className='title'>
 							Currencies: <span className='data'>{currencies}</span>
 						</p>
 						<p className='title'>
-							Region: <span className='data'>{detail.region || notAvailable}</span>
+							Region: <span className='data'>{region}</span>
 						</p>
 						<p className='title'>
 							Languages: <span className='data'>{languages}</span>
 						</p>
 						<p className='title'>
-							Sub Region: <span className='data'>{detail.subregion || notAvailable}</span>
+							Sub Region: <span className='data'>{subregion}</span>
 						</p>
 						<p className='title'>
-							Capital: <span className='data'>{detail.capital || notAvailable}</span>
+							Capital: <span className='data'>{capital}</span>
 						</p>
 					</div>
 					<div className='border-info'>

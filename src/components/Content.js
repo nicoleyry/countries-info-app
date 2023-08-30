@@ -26,7 +26,7 @@ export default function Content({ setSelectedCountry, searchValue, setSearchValu
 	// Search for data
 	useEffect(() => {
 		let searchParam = searchValue.charAt(0).toUpperCase() + searchValue.slice(1); // capitalize search param
-		let result = countriesData.filter((country) => country.name.includes(searchParam));
+		let result = countriesData.filter((country) => country.name.common.includes(searchParam));
 		setFilteredData(result);
 		result.length === 0 ? setNoResult(true) : setNoResult(false);
 	}, [countriesData, searchValue]);
@@ -46,10 +46,10 @@ export default function Content({ setSelectedCountry, searchValue, setSearchValu
 	let createCard = (countriesData) => {
 		return (
 			<Card
-				key={countriesData.alpha2Code}
-				name={countriesData.name}
+				key={countriesData.cca2}
+				name={countriesData.name.common}
 				population={countriesData.population}
-				flag={countriesData.flag}
+				flag={countriesData.flags.svg}
 				region={countriesData.region}
 				capital={countriesData.capital}
 				onClick={(name) => setSelectedCountry(name)}
@@ -117,7 +117,6 @@ const Dropdown = ({ trigger, menu, open, setOpen, setFilterRegion }) => {
 							{cloneElement(menuItem, {
 								onClick: (e) => {
 									setFilterRegion(e.target.value);
-									console.log(e.target.value);
 									menuItem.props.onClick();
 									setOpen(false);
 								},
