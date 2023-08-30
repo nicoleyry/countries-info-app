@@ -6,12 +6,15 @@ import Details from './components/Details';
 import staticCountriesData from './data.json';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import { useCookies } from "react-cookie";
 
 function App() {
-	const [darkMode, setDarkMode] = useState(false);
+	const [cookies, setCookie] = useCookies("DarkMode", false);
+	const [darkMode, setDarkMode] = useState(cookies.DarkMode);
 	const [searchValue, setSearchValue] = useState('');
 	const [selectedCountry, setSelectedCountry] = useState('');
 	const [countriesData, setCountriesData] = useState(staticCountriesData);
+	
 	let apiURL = 'https://restcountries.com/v3.1/all';
 	let param = 'name,tld,cca2,cca3,capital,subregion,region,population,nativeName,currencies,languages,flags,borders';
 
@@ -23,6 +26,10 @@ function App() {
 			console.log(err);
 		});
 	}, []);
+
+	useEffect(() => {
+		setCookie("DarkMode", darkMode, {path: "/"});
+	}, [setCookie, darkMode]);
 
 	return (
 		<div className={`App ${darkMode ? 'dark' : ''}`}>
