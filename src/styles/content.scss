@@ -4,6 +4,7 @@
 
 .content {
 	padding: 50px;
+	background-color: var.$color-very-light-gray;
 
 	& .top-area {
 		display: flex;
@@ -25,6 +26,8 @@
 				margin: 0;
 				border: 1px solid transparent;
 				border-radius: inherit;
+				// background-color: transparent;
+				// background-image: url(../assets/images/search-outline.svg);
 				background: transparent url(../assets/images/search-outline.svg) no-repeat center;
 				cursor: pointer;
 				opacity: 0.7;
@@ -104,17 +107,16 @@
 				& > li {
 					padding: 10px;
 					margin: 0;
-					background-color: white;
+					background-color: var.$color-white;
 					
 					&:hover {
-						background-color: lightgray;
+						background-color: var.$color-very-light-gray;
 					}
 					
 					& > input {
 						width: 100%;
 						height: 100%;
 						text-align: left;
-			
 						background: none;
 						color: inherit;
 						border: none;
@@ -154,11 +156,76 @@
 		}
 
 		&:hover {
-			background-color: rgba(var.$color-dark-gray, $alpha: 0.1);
+			background-color: rgba(var.$color-dark-gray, 0.1);
 		}
 		&:active {
 			box-shadow: rgba(var.$color-dark-gray, 0.2) var.$btn-active-shadow;
 			transform: translateY(1px);
+		}
+	}
+}
+
+.dark {
+	& .content {
+		background-color: var.$color-very-dark-blue;
+
+		& .top-area {
+			& .search-container {
+				background-color: var.$color-dark-blue;
+				@include mix.box-style-dark();
+
+				& .search-btn {
+					background: var.$color-white none no-repeat center;
+					-webkit-mask: url(../assets/images/search-outline.svg) no-repeat 50% 50%;
+					mask: url(../assets/images/search-outline.svg) no-repeat 50% 50%;
+				}
+
+				& .search-input {
+					color: var.$color-white;
+
+					&::placeholder {
+						color: var.$color-white;
+					}
+				}
+			}
+			& .dropdown {
+				@include mix.box-style-dark();
+				
+				& .dropdown-btn {
+					background-color: var.$color-dark-blue;
+					color: var.$color-white;
+					@include mix.box-style-dark();
+
+					&:after {
+						background: var.$color-white none no-repeat center;
+						-webkit-mask: url(../assets/images/chevron-down-outline.svg) no-repeat 50% 50%;
+						mask: url(../assets/images/chevron-down-outline.svg) no-repeat 50% 50%;
+					}
+				}
+
+				& .menu {
+					@include mix.box-style-dark();
+
+					& > li {
+						background-color: var.$color-dark-blue;
+
+						&:hover {
+							background-color: var.$color-very-dark-blue;
+						}
+					}
+				}
+			}
+		}
+		& .show-more {
+			background-color: var.$color-dark-blue;
+			@include mix.box-style-dark();
+
+			&:hover {
+				background-color: rgba(var.$color-very-very-dark-blue, 0.1);
+			}
+			&:active {
+				box-shadow: rgba(var.$color-very-very-dark-blue, 0.3) var.$btn-active-shadow;
+			}
 		}
 	}
 }

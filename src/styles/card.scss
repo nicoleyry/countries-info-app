@@ -40,3 +40,13 @@
 		}
 	}
 }
+
+.dark {
+	& .card {
+		background-color: var.$color-dark-blue;
+
+		& p {
+			color: var.$color-white;
+		}
+	}
+}

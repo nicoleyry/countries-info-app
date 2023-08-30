@@ -4,3 +4,8 @@
 	box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.5);
 	border-radius: 3px;
 }
+
+@mixin box-style-dark () {
+	box-shadow: 3px 3px 10px rgba(var.$color-very-very-dark-blue, 0.3);
+	border-radius: 3px;
+}

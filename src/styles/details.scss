@@ -3,6 +3,7 @@
 
 .details {
 	padding: 50px;
+	background-color: var.$color-very-light-gray;
 
 	& .top {
 		width: 100%;
@@ -90,6 +91,31 @@
 						background-color: var.$color-white;
 						box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
 						border-radius: 3px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.dark {
+	& .details {
+		background-color: var.$color-very-dark-blue;
+		
+		& .top {
+			& .back-btn {
+				color: var.$color-white;
+				background-color: var.$color-dark-blue;
+				@include mix.box-style-dark();
+			}
+		}
+
+		& .bottom {
+			& .info-area {
+				& .border-data {
+					& .data {
+						background-color: var.$color-very-dark-blue;
+						box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
 					}
 				}
 			}

@@ -12,12 +12,22 @@
 	$navH: 80px;
 	display: grid;
 	grid-template-rows: $navH calc(100vh - $navH);
-	height: 100vh;
+	height: auto;
 
 	& .nav {
 		background-color: var.$color-white;
 	}
 	& .body {
 		background-color: var.$color-very-light-gray;
+	}
+
+	&.dark {
+		color: var.$color-white;
+		& .nav {
+			background-color: var.$color-dark-blue;
+		}
+		& .body {
+			background-color: var.$color-very-dark-blue;
+		}
 	}
 }
