@@ -12,34 +12,33 @@ export default function Details({ countriesData }) {
 	let currencies = detail.currencies
 		? detail.currencies.map((currency, i, arr) => {
 				return `${currency.name}${i + 1 === arr.length ? '' : ', '}`;
-			})
+		})
 		: notAvailable;
-		
+
 	let languages = detail.languages
 		? detail.languages.map((lang, i, arr) => {
 				return `${lang.name}${i + 1 === arr.length ? '' : ', '}`;
-			})
-		: notAvailable;
-
-	let borders = detail.borders
-		? detail.borders.map((border) => {
-				return border;
-			})
+		})
 		: notAvailable;
 
 	let fullBorders = [];
-	for (let i = 0; i < countriesData.length; i++) {
-		for (let j = 0; j < borders.length; j++) {
-			if (countriesData[i].alpha3Code === borders[j]) {
-				fullBorders.push(countriesData[i].name);
+	if(detail.borders) {
+		for (let i = 0; i < countriesData.length; i++) {
+			for (let j = 0; j < detail.borders.length; j++) {
+				if (countriesData[i].alpha3Code === detail.borders[j]) {
+					fullBorders.push(countriesData[i].name);
+				}
 			}
 		}
 	}
-	let fullBordersBlock = fullBorders.length > 0 ? fullBorders.map((name) => (
-		<span className='data' key={name}>
-			{name}
-		</span>
-	)) : notAvailable;
+
+	let fullBordersBlock = fullBorders.length > 0
+		? fullBorders.map((name) => (
+				<span className='data' key={name}>
+					{name}
+				</span>
+		))
+		: notAvailable;
 
 	return (
 		<div className='details'>
@@ -70,7 +69,7 @@ export default function Details({ countriesData }) {
 							Top Level Domain: <span className='data'>{detail.topLevelDomain || notAvailable}</span>
 						</p>
 						<p className='title'>
-							Population:{' '}
+							Population:
 							<span className='data'>
 								{(detail.population && formatter.format(detail.population)) || notAvailable}
 							</span>
@@ -99,4 +98,4 @@ export default function Details({ countriesData }) {
 			</div>
 		</div>
 	);
-}
+};
