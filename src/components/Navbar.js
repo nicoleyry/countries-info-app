@@ -3,7 +3,7 @@ import '../styles/navbar.scss';
 export default function Navbar({ darkMode, setDarkMode }) {
 	return (
 		<div className='navbar'>
-			<h2>Where in the world?</h2>
+			<a href='/'><h2>Where in the world?</h2></a>
 			<div className='mode' onClick={() => (darkMode ? setDarkMode(false) : setDarkMode(true))}>
 				{darkMode && 
 				<>

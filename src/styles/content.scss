@@ -71,6 +71,7 @@
 			width: $width;
 			position: relative;
 			@include mix.box-style();
+			@include mix.disable-text-select();
 			
 			& .dropdown-btn {
 				cursor: pointer;
@@ -163,6 +164,7 @@
 		cursor: pointer;
 		background-color: var.$color-very-light-gray;
 		@include mix.box-style();
+		@include mix.disable-text-select();
 
 		& p {
 			font-weight: 600;

@@ -22,6 +22,7 @@
 			color: var.$color-black;
 			
 			@include mix.box-style();
+			@include mix.disable-text-select();
 
 			&:hover {
 				background-color: rgba(var.$color-dark-gray, $alpha: 0.1);
@@ -115,6 +116,16 @@
 						background-color: var.$color-white;
 						box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
 						border-radius: 3px;
+						text-decoration: none;
+						color: var.$color-black;
+
+						&:hover {
+							background-color: rgba(var.$color-dark-gray, $alpha: 0.1);
+						}
+						&:active {
+							box-shadow: rgba(var.$color-dark-gray, 0.2) var.$btn-active-shadow;
+							transform: translateY(1px);
+						}
 					}
 				}
 			}
@@ -138,6 +149,7 @@
 			& .info-area {
 				& .border-data {
 					& .data {
+						color: var.$color-white;
 						background-color: var.$color-dark-blue;;
 						box-shadow: 1px 1px 3px rgba(var.$color-dark-gray, 0.2);
 					}

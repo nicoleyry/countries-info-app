@@ -1,11 +1,13 @@
 import '../styles/details.scss';
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const formatter = new Intl.NumberFormat('en-US', {
 	maximumSignificantDigits: 3,
 });
 
 export default function Details({ countriesData }) {
+	const navigate = useNavigate();
 	let { selectedCountry } = useParams();
 	let notAvailable = 'N/A';
 	let detail = countriesData.filter((country) => country.name.common === selectedCountry)[0];
@@ -41,17 +43,17 @@ export default function Details({ countriesData }) {
 
 	let fullBordersBlock =
 		fullBorders.length > 0
-			? fullBorders.map((name) => (
-					<span className='data' key={name}>
+			? fullBorders.map((name) => 
+					(<a href={`./${name}`} className='data' key={name}>
 						{name}
-					</span>
-			))
+					</a>)
+			)
 			: notAvailable;
 
 	return (
 		<div className='details'>
 			<div className='top'>
-				<a className='back-btn' href='/'>
+				<div className='back-btn' onClick={() => navigate(-1)}>
 					<svg width='15' xmlns='http://www.w3.org/2000/svg' className='ionicon' viewBox='0 0 512 512'>
 						<path
 							fill='none'
@@ -63,7 +65,7 @@ export default function Details({ countriesData }) {
 						/>
 					</svg>
 					<p>Back</p>
-				</a>
+				</div>
 			</div>
 			<div className='bottom'>
 				<img className='img-area' src={imgUrl} alt={imgAlt} />

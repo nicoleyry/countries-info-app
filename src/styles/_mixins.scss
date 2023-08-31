@@ -5,7 +5,14 @@
 	border-radius: 3px;
 }
 
-@mixin box-style-dark () {
+@mixin box-style-dark() {
 	box-shadow: 3px 3px 10px rgba(var.$color-very-very-dark-blue, 0.3);
 	border-radius: 3px;
+}
+
+@mixin disable-text-select() {
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;
 }
