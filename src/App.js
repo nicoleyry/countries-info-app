@@ -54,6 +54,10 @@ function App() {
 						<Route path='/:selectedCountry' element={<Details countriesData={countriesData} />} />
 					</Routes>
 				</Router>
+				<div className="attribution">
+					Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+					Coded by <a href="https://www.nicoleyry.com/">Nicole Yang</a>.
+				</div>
 			</div>
 		</div>
 	);

@@ -8,6 +8,15 @@
 	background-color: var.$color-white;
 	cursor: pointer;
 
+	&:hover {
+		transform: translateY(3px);
+		box-shadow: 3px 3px 8px rgba(var.$color-dark-gray, 0.3);
+	}
+
+	&:active {
+		transform: translateY(5px);
+	}
+
 	& a {
 		text-decoration: none;
 		color: var.$color-black;

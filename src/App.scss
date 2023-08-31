@@ -11,8 +11,9 @@
 .App {
 	$navH: 80px;
 	display: grid;
-	grid-template-rows: $navH calc(100vh - $navH);
-	height: auto;
+	grid-template-rows: $navH calc(100% - $navH);
+	height: 100%;
+	min-height: 100vh;
 
 	& .nav {
 		background-color: var.$color-white;
@@ -20,6 +21,26 @@
 	}
 	& .body {
 		background-color: var.$color-very-light-gray;
+		position: relative;
+
+		& .attribution {
+			position: absolute;
+			transform: translateX(-50%);
+			left: 50%;
+			bottom: 5px;
+			font-size: 11px;
+			text-align: center;
+			z-index: 1;
+
+			& a {
+				color: hsl(228, 45%, 44%);
+				text-decoration: none;
+
+				&:hover {
+					color: hsl(228, 63%, 24%);
+				}
+			}
+		}
 	}
 
 	&.dark {
@@ -30,6 +51,16 @@
 		}
 		& .body {
 			background-color: var.$color-very-dark-blue;
+
+			& .attribution {
+				& a {
+					color: hsl(228, 46%, 70%);
+
+					&:hover {
+						color: hsl(228, 54%, 61%);
+					}
+				}
+			}
 		}
 	}
 }
