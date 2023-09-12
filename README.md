@@ -40,7 +40,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca/hub?share=true](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca/hub?share=true)
+- Solution URL: [https://www.frontendmentor.io/solutions/responsive-country-info-app-by-using-react-react-router-sass-axios-_fixosYiyl](https://www.frontendmentor.io/solutions/responsive-country-info-app-by-using-react-react-router-sass-axios-_fixosYiyl)
 - Live Site URL: [https://nicoleyry-countries-info-app.netlify.app/](https://nicoleyry-countries-info-app.netlify.app/)
 
 ## My process
